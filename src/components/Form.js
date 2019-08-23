@@ -40,8 +40,9 @@ const OnBoardingForm = ({ errors, touched, values, status }) => {
             name="tos"
             checked={values.tos}
           />
-          <span className="checkmark" />
         </label>
+
+        {touched.tos && errors.tos && (<p className="error">{errors.tos}</p>)}
 
         <button type="submit">Submit!</button>
 
@@ -72,6 +73,7 @@ const personalInfo = withFormik({
     name: Yup.string().required("You need to provide your name"),
     email: Yup.string().required("You must provide an email"),
     password: Yup.string().required("Please enter a password"),
+    tos: Yup.boolean().oneOf([true], "Must accept Terms of Service")
   }),
 
   handleSubmit(values, { setStatus }) {
